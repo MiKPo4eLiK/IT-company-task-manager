@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}RootIT{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="{% url 'company:index' %}">Root Manager</a>
+    <div class="ms-auto">
+      {% if user.is_authenticated %}
+        <span class="navbar-text me-2">Welcome, {{ user.username }}!</span>
+        <a href="{% url 'company:logout' %}" class="btn btn-outline-light btn-sm">Log Out</a>
+      {% else %}
+        <a href="{% url 'company:login' %}" class="btn btn-outline-light btn-sm">Log In</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="#">RootIT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+            <li><a class="dropdown-item" href="#">Intrusion protection</a></li>
+            <li><a class="dropdown-item" href="#">Video surveillance</a></li>
+            <li><a class="dropdown-item" href="#">Fire safety</a></li>
+            <li><a class="dropdown-item" href="#">Comfort and automation</a></li>
+            <li><a class="dropdown-item" href="#">All products</a></li>
+            <li><a class="dropdown-item" href="#">Services</a></li>
+            <li><a class="dropdown-item" href="#">System integrations</a></li>
+            <li><a class="dropdown-item" href="#">Products RootIt</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="softDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Soft
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="softDropdown">
+            <li><a class="dropdown-item" href="#">For users</a></li>
+            <li><a class="dropdown-item" href="#">RootIt PRO: Tool for Engineers</a></li>
+            <li><a class="dropdown-item" href="#">RootIt Desktop</a></li>
+            <li><a class="dropdown-item" href="#">RootIt PRO Desktop</a></li>
+            <li><a class="dropdown-item" href="#">RootIt Translator PRO</a></li>
+            <li><a class="dropdown-item" href="#">RootIt Cloud Signaling</a></li>
+            <li><a class="dropdown-item" href="#">Scenarios</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="solutionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Solutions
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="solutionsDropdown">
+            <li><a class="dropdown-item" href="#">Customer Stories</a></li>
+            <li><a class="dropdown-item" href="#">Solutions by Facility</a></li>
+            <li><a class="dropdown-item" href="#">Modernization and Renovation</a></li>
+            <li><a class="dropdown-item" href="#">Why RootIt</a></li>
+            <li><a class="dropdown-item" href="#">How RootIt works</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="supportDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Support
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="supportDropdown">
+            <li><a class="dropdown-item" href="#">Instructions & Articles</a></li>
+            <li><a class="dropdown-item" href="#">Service & Repair</a></li>
+            <li><a class="dropdown-item" href="#">Compliance with standards</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tools
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+            <li><a class="dropdown-item" href="#">RootIt device compatibility</a></li>
+            <li><a class="dropdown-item" href="#">Video archive calculator</a></li>
+            <li><a class="dropdown-item" href="#">Battery life calculator</a></li>
+            <li><a class="dropdown-item" href="#">Radio range calculator</a></li>
+            <li><a class="dropdown-item" href="#">Switch and socket configurator</a></li>
+            <li><a class="dropdown-item" href="#">Fibra power calculator</a></li>
+            <li><a class="dropdown-item" href="#">All web tools</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="companyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Company
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="companyDropdown">
+            <li><a class="dropdown-item" href="#">Blog</a></li>
+            <li><a class="dropdown-item" href="#">About Us</a></li>
+            <li><a class="dropdown-item" href="#">Press page</a></li>
+            <li><a class="dropdown-item" href="#">Events</a></li>
+            <li><a class="dropdown-item" href="#">Careers</a></li>
+            <li><a class="dropdown-item" href="#">RootIt Next</a></li>
+            <li><a class="dropdown-item" href="#">Students at CES 2026</a></li>
+            <li><a class="dropdown-item" href="#">Reviews and feedback</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            For Partners
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+            <li><a class="dropdown-item" href="#">For Partners</a></li>
+            <li><a class="dropdown-item" href="#">RootIt Academy</a></li>
+            <li><a class="dropdown-item" href="#">Partner Portal</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+<footer class="footer">
+  <div class="container footer-main-content">
+    <div class="row gy-32">
+
+      <div class="col-lg-8 order-1 order-lg-0">
+        <div class="row gy-32">
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Products</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">Intrusion protection</a></li>
+              <li><a href="#">Video surveillance</a></li>
+              <li><a href="#">Fire safety</a></li>
+              <li><a href="#">Comfort and automation</a></li>
+              <li><a href="#">All products</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">System integrations</a></li>
+              <li><a href="#">Products RootIt</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Soft</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">For users</a></li>
+              <li><a href="#">RootIt PRO: Tool for Engineers</a></li>
+              <li><a href="#">RootIt Desktop</a></li>
+              <li><a href="#">RootIt PRO Desktop</a></li>
+              <li><a href="#">RootIt Translator PRO</a></li>
+              <li><a href="#">RootIt Cloud Signaling</a></li>
+              <li><a href="#">Scenarios</a></li>
+            </ul>
+            <ul class="list-unstyled mb-0 text-secondary mt-4">
+              <li class="mb-2">
+                <a class="app-button" href="https://apps.apple.com/app/rootit-security-system/id1068169547" target="_blank" rel="noreferrer noopener" title="App Store">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M37.377 1.75c0.323 2.969-0.861 5.949-2.607 8.088-1.747 2.136-4.622 3.805-7.433 3.582-0.378-2.91 1.035-5.938 2.658-7.835 1.812-2.143 4.858-3.732 7.382-3.835zM46.45 19.042c-0.541 0.34-5.433 3.417-5.37 9.618 0.067 7.397 6.197 10.023 6.693 10.236 0.018 0.008 0.028 0.012 0.031 0.014-0.004 0.012-0.013 0.040-0.027 0.083-0.181 0.574-1.199 3.799-3.448 7.12-2.088 3.083-4.248 6.154-7.665 6.22-1.639 0.031-2.734-0.449-3.873-0.948-1.193-0.523-2.435-1.066-4.398-1.066-2.057 0-3.356 0.56-4.607 1.099-1.083 0.467-2.13 0.918-3.603 0.978-3.293 0.121-5.806-3.332-7.912-6.407-4.306-6.293-7.592-17.772-3.174-25.523 2.193-3.846 6.111-6.283 10.367-6.349 1.834-0.033 3.61 0.68 5.165 1.304 1.188 0.477 2.247 0.902 3.103 0.902 0.77 0 1.802-0.411 3.004-0.89 1.892-0.754 4.206-1.676 6.589-1.429 1.638 0.066 6.22 0.664 9.165 5.013-0.008 0.005-0.021 0.014-0.041 0.026z"></path></svg>
+                  <div><span class="fs-7">Available on</span><br><span class="fs-6 fw-bold">App Store</span></div>
+                </a>
+              </li>
+              <li>
+                <a class="app-button" href="https://play.google.com/store/apps/details?id=com.rootitsystems" target="_blank" rel="noreferrer noopener" title="Google Play">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M38.080 19.922l-6.617 6.796-20.924-21.282c0.894-0.358 1.788-0.179 2.683 0.358l24.859 14.128zM8.75 8.476c0-0.894 0.179-1.431 0.358-1.967l21.103 21.461-20.924 21.64c-0.358-0.536-0.537-1.073-0.537-1.967v-39.166zM48.274 25.466l-8.406-4.829-6.975 7.154 7.154 7.333 8.227-4.65c2.504-1.252 2.504-3.577 0-5.008zM10.538 50.683l20.924-21.461 6.796 6.796-25.038 14.129c-1.073 0.536-1.967 0.715-2.683 0.536z"></path></svg>
+                  <div><span class="fs-7">Available on</span><br><span class="fs-6 fw-bold">Google Play</span></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Solutions</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">Customer Stories</a></li>
+              <li><a href="#">Solutions by Facility</a></li>
+              <li><a href="#">Modernization and Renovation</a></li>
+              <li><a href="#">Why RootIt</a></li>
+              <li><a href="#">How RootIt works</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Support</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">Instructions & Articles</a></li>
+              <li><a href="#">Service & Repair</a></li>
+              <li><a href="#">Compliance with standards</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Tools</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">RootIt device compatibility</a></li>
+              <li><a href="#">Video archive calculator</a></li>
+              <li><a href="#">Video device calculator</a></li>
+              <li><a href="#">Battery life calculator</a></li>
+              <li><a href="#">Radio range calculator</a></li>
+              <li><a href="#">Switch and socket configurator</a></li>
+              <li><a href="#">Fibra power calculator</a></li>
+              <li><a href="#">All web tools</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">Company</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Press page</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">RootIt Next</a></li>
+              <li><a href="#">Students at CES 2026</a></li>
+              <li><a href="#">Reviews and feedback</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h2 class="footer-title">For Partners</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">For Partners</a></li>
+              <li><a href="#">RootIt Academy</a></li>
+              <li><a href="https://partner.rootit.systems/">Partner Portal</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 order-0 order-lg-1">
+        <h2 class="footer-title">Subscribe</h2>
+        <p class="fs-6 footer-text">Subscribe to Newsletter</p>
+        <div class="mb-4">
+          <button type="button" class="btn btn-primary">Subscribe</button>
+        </div>
+
+        <div class="my-4">
+          <h2 class="footer-title">Contact support</h2>
+          <ul class="list-unstyled text-secondary">
+            <li class="d-flex align-items-center mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M18.373 38.467c2.416 2.412 4.967 4.59 7.652 6.534s5.37 3.485 8.055 4.624c2.685 1.139 5.227 1.709 7.627 1.709 1.628 0 3.146-0.293 4.556-0.88s2.685-1.508 3.826-2.764c0.671-0.737 1.2-1.533 1.586-2.387 0.386-0.838 0.579-1.684 0.579-2.538 0-0.637-0.126-1.24-0.378-1.809-0.252-0.586-0.68-1.089-1.284-1.508l-7.728-5.478c-0.587-0.402-1.133-0.704-1.636-0.905s-0.982-0.302-1.435-0.302c-0.571 0-1.124 0.159-1.661 0.477-0.537 0.302-1.091 0.737-1.661 1.307l-1.787 1.759c-0.252 0.268-0.571 0.402-0.956 0.402-0.201 0-0.394-0.034-0.579-0.101-0.168-0.067-0.31-0.126-0.428-0.176-0.789-0.419-1.795-1.139-3.020-2.161-1.225-1.039-2.458-2.178-3.7-3.418-1.225-1.24-2.358-2.471-3.398-3.694s-1.762-2.22-2.165-2.99c-0.067-0.134-0.134-0.285-0.201-0.452-0.050-0.184-0.076-0.369-0.076-0.553 0-0.369 0.126-0.679 0.378-0.93l1.787-1.834c0.554-0.57 0.99-1.123 1.309-1.659s0.478-1.089 0.478-1.659c0-0.452-0.109-0.93-0.327-1.432-0.201-0.503-0.512-1.047-0.931-1.634l-5.412-7.614c-0.436-0.603-0.956-1.039-1.561-1.307-0.604-0.285-1.242-0.427-1.913-0.427-1.728 0-3.348 0.729-4.858 2.186-1.225 1.173-2.123 2.471-2.693 3.895-0.554 1.407-0.831 2.915-0.831 4.523 0 2.412 0.562 4.951 1.686 7.615 1.124 2.647 2.651 5.302 4.581 7.966s4.103 5.202 6.519 7.615z"></path></svg>
+              <a class="text-decoration-none" href="tel:0800551944">0 800 551 944</a>
+            </li>
+            <li class="d-flex align-items-center mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M3.093 43.167v-27.957c0-0.969 1.113-1.516 1.88-0.923l23.073 17.829c0.42 0.325 1.007 0.325 1.427 0l23.073-17.829c0.767-0.593 1.88-0.046 1.88 0.923v27.957c0 2.577-2.089 4.667-4.667 4.667h-42c-2.577 0-4.667-2.089-4.667-4.667z"></path><path d="M29.473 27.449l22.249-17.192c0.881-0.68 0.399-2.090-0.713-2.090h-44.498c-1.113 0-1.594 1.409-0.713 2.090l22.249 17.192c0.42 0.325 1.007 0.325 1.427 0z"></path></svg>
+              <a class="text-decoration-none" href="mailto:support@rootit.systems">support@rootit.systems</a>
+            </li>
+            <li class="d-flex align-items-center mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M56.6 28c0 15.464-12.536 28-28 28s-28-12.536-28-28c0-15.464 12.536-28 28-28s28 12.536 28 28zM29.604 20.671c-2.723 1.133-8.166 3.477-16.329 7.034-1.326 0.527-2.020 1.043-2.083 1.547-0.107 0.852 0.96 1.188 2.413 1.645 0.198 0.062 0.402 0.126 0.613 0.195 1.43 0.465 3.353 1.008 4.353 1.030 0.907 0.020 1.919-0.354 3.036-1.122 7.627-5.148 11.563-7.75 11.811-7.806 0.174-0.040 0.416-0.089 0.58 0.056s0.148 0.421 0.13 0.495c-0.106 0.451-4.295 4.345-6.462 6.36-0.676 0.628-1.155 1.074-1.253 1.176-0.22 0.228-0.443 0.444-0.658 0.651-1.328 1.28-2.324 2.241 0.055 3.808 1.143 0.753 2.058 1.376 2.971 1.998 0.997 0.679 1.991 1.356 3.278 2.199 0.328 0.215 0.641 0.438 0.946 0.655 1.16 0.827 2.202 1.57 3.49 1.452 0.748-0.069 1.521-0.772 1.914-2.871 0.928-4.959 2.751-15.703 3.172-20.131 0.037-0.388-0.010-0.884-0.047-1.102s-0.115-0.528-0.399-0.758c-0.336-0.272-0.853-0.33-1.085-0.326-1.053 0.018-2.669 0.58-10.445 3.815z"></path></svg>
+              <a class="text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://t.me/RootItSystemsSupport_Bot">@RootItSystemsSupport_Bot</a>
+            </li>
+            <li class="d-flex align-items-center mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 56 56" width="1em" height="1em" class="me-2"><path fill="currentColor" d="M48.207 1.99805C50.1326 1.99805 51.8713 2.79664 53.1172 4.06543C54.3621 5.33331 55.1278 7.08215 55.1279 9V35.5186C55.1279 37.4366 54.3622 39.1861 53.1172 40.4541C51.8713 41.7228 50.1326 42.5205 48.207 42.5205H42.5V52C42.5 53.0108 41.8907 53.9224 40.957 54.3096C40.0234 54.6966 38.9487 54.4836 38.2334 53.7695L26.9648 42.5205H7.79199C5.86646 42.5205 4.12768 41.7228 2.88184 40.4541C1.63678 39.1861 0.871133 36.4367 0.871094 34.5186V8C0.871201 6.08232 1.63701 5.33314 2.88184 4.06543C4.12768 2.79667 5.86643 1.99809 7.79199 1.99805H48.207ZM10.498 23.5V30.5H45.498V23.5H10.498ZM10.498 12.5V19.5H45.498V12.5H10.498Z"></path></svg>
+              <a class="text-decoration-none" href="/ua/support-request/">Send a request</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="my-4">
+          <div class="d-flex align-items-center mb-2">
+            <svg viewBox="0 0 512 96" xmlns="http://www.w3.org/2000/svg" class="trustpilot-widget_stars__Ju_f_ my-8" style="width: 150px; height: 30px;">
+              <path fill="#7F8282" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"></path>
+              <path class="trustpilot-stars_rating__CyJoX" style="--stars-width: 9.375%;" fill="#00B67A" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"></path>
+              <path fill="#FFF" d="M48 64.7L62.6 61l6.1 18.8L48 64.7zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2 20.7-15zM152 64.7l14.6-3.7 6.1 18.8L152 64.7zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2 20.7-15zM256 64.7l14.6-3.7 6.1 18.8L256 64.7zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2 20.7-15zM360 64.7l14.6-3.7 6.1 18.8L360 64.7zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2 20.7-15zM464 64.7l14.6-3.7 6.1 18.8L464 64.7zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2 20.7-15z"></path>
+            </svg>
+            <div class="vr text-secondary mx-3"></div>
+            <p class="fs-7 mb-0 text-secondary">
+              Rating 4.7
+              <span class="fs-4 fw-bold d-block">3 490 000</span>
+              people worldwide are protected by RootIt
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-4 text-secondary fs-5">
+          <a class="text-decoration-none d-flex align-items-center mb-2" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="1em" height="1em" fill="currentColor" class="me-2"><path d="M28 56c15.464 0 28-12.536 28-28s-12.536-28-28-28c-15.464 0-28 12.536-28 28s12.536 28 28 28zM28 14c1.933 0 3.5 1.567 3.5 3.5v0.261c0 1.933-1.567 3.5-3.5 3.5s-3.5-1.567-3.5-3.5v-0.262c0-1.933 1.567-3.5 3.5-3.5zM23.333 23.39h7.7v19.907h-6.067v-13.84h-1.633v-6.067z"></path></svg>
+              Report an error
+          </a>
+          <a class="text-decoration-none d-flex align-items-center" href="/ua/suggest-a-feature/">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 56 57" width="1em" height="1em" class="me-2"><path fill="currentColor" fill-rule="evenodd" d="M9.14062 17.8987C9.14062 8.3469 17.7595 0.573255 28.5026 0.314453C39.2457 0.573255 47.8646 8.3469 47.8646 17.8987C47.8646 21.6877 46.5083 25.197 44.2011 28.0684C42.4314 29.973 38.9862 40.851 38.6246 47.8086C38.622 47.8584 38.6161 47.907 38.6064 47.956C36.41 59.1205 20.3625 59.0875 18.3843 47.8823C18.0434 40.928 14.58 29.9797 12.8041 28.0684C10.4969 25.197 9.14062 21.6877 9.14062 17.8987ZM26.1277 17.7429C25.6995 18.0656 25.5357 18.4073 25.5357 18.8302H19.6545C19.6545 16.3095 20.8986 14.3194 22.5882 13.0461C24.2212 11.8155 26.2773 11.226 28.2502 11.226C30.0691 11.226 32.2103 11.6447 33.9604 13.0211C35.8287 14.4906 36.8459 16.7322 36.8459 19.4965C36.8459 21.3447 36.1037 22.7787 35.2475 23.861C34.5593 24.7309 33.6807 25.5045 33.0246 26.0821C32.9367 26.1595 32.8526 26.2335 32.7738 26.3036C31.2171 27.6866 30.6767 28.4031 30.6767 29.4967H24.7955C24.7955 25.5494 27.3397 23.2645 28.8676 21.907L29.1198 21.6833C29.844 21.0413 30.2966 20.6401 30.6352 20.2121C30.9358 19.8322 30.9648 19.647 30.9648 19.4965C30.9648 18.2633 30.574 17.8399 30.3246 17.6438C29.9569 17.3546 29.2706 17.1071 28.2502 17.1071C27.3838 17.1071 26.6124 17.3776 26.1277 17.7429ZM27.7904 32.2624C29.4144 32.2624 30.731 33.5789 30.731 35.2029V35.2996C30.731 36.9236 29.4145 38.2402 27.7905 38.2402C26.1664 38.2402 24.8499 36.9237 24.8498 35.2997L24.8498 35.2031C24.8498 33.579 26.1663 32.2625 27.7904 32.2624Z" clip-rule="evenodd"></path></svg>
+              Suggest a feature
+          </a>
+        </div>
+
+
+        <div class="social-links d-flex mt-4">
+          <a href="https://www.facebook.com/rootit" class="social-icon text-white me-2" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/rootit" class="social-icon text-white me-2" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/rootit" class="social-icon text-white me-2" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/rootit" class="social-icon text-white" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom-bar mt-5 pt-4">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <ul class="list-unstyled d-flex flex-wrap">
+          <li class="me-3 mb-2"><a href="#">United States</a></li>
+          <li class="me-3 mb-2"><a href="#">Privacy Policy</a></li>
+          <li class="me-3 mb-2"><a href="#">Report a vulnerability</a></li>
+          <li class="me-3 mb-2"><a href="#">Cookie Policy</a></li>
+          <li class="me-3 mb-2"><a href="#">Anti-Spam Policy</a></li>
+          <li class="me-3 mb-2"><a href="#">End User Agreement</a></li>
+          <li class="me-3 mb-2"><a href="#">Warranty</a></li>
+          <li class="me-3 mb-2"><a href="#">Environmental Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 text-end">
+        <p class="mb-0">© 2025 ROOTIT SYSTEMS. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

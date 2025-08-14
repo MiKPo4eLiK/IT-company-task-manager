@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}RootIt{% endblock %}
+
+{% block content %}
+  <h1>Welcome to RootIt Task Manager!</h1>
+  <p class="lead">This is a system for managing tasks in an RootIt Company</p>
+
+  {% if user.is_authenticated %}
+    <a class="btn btn-primary" href="{% url 'company:task-list' %}">Go to tasks</a>
+  {% else %}
+    <a class="btn btn-success" href="{% url 'login' %}">Log In</a>
+  {% endif %}
+{% endblock %}
