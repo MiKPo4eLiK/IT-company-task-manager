@@ -1,14 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from .models import TaskType, Position, Worker, Task, Tag
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
 from .forms import TaskForm
+from django.contrib.auth.models import User
 
 
 @login_required
@@ -158,11 +160,11 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     queryset = Worker.objects.all().prefetch_related("tasks__task_type", "tasks__tags")
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         worker = self.get_object()
         completed_tasks = worker.tasks.filter(is_completed=True).order_by("-deadline")
-        incomplete_tasks = worker.tasks.filter(is_completed=False).order_by("deadline")  # <-- Виправлено
+        incomplete_tasks = worker.tasks.filter(is_completed=False).order_by("deadline")
         context["completed_tasks"] = completed_tasks
         context["incomplete_tasks"] = incomplete_tasks
         return context
@@ -197,20 +199,26 @@ class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("company:worker-list")
 
 
-@login_required
-def toggle_assign_to_worker(request, pk) -> HttpResponseRedirect:
-    worker = request.user
-    task = get_object_or_404(Task, pk=pk)
+class ToggleAssignView(LoginRequiredMixin, View):
+    """
+    Class-based view to toggle the assignment of a worker to a task.
+    """
 
-    if worker in task.assignees.all():
-        task.assignees.remove(worker)
-    else:
-        task.assignees.add(worker)
+    def get(self, request, pk):
+        """
+        Handles GET requests to toggle a worker's assignment to a task.
+        """
+        task = get_object_or_404(Task, pk=pk)
 
-    return HttpResponseRedirect(reverse_lazy("company:task-detail", args=[pk]))
+        if request.user in task.assignees.all():
+            task.assignees.remove(request.user)
+        else:
+            task.assignees.add(request.user)
+
+        return HttpResponseRedirect(reverse_lazy("company:task-detail", args=[pk]))
 
 
-def task_list_view(request):
+def task_list_view(request) -> HttpResponse:
     filtered_tasks = Task.objects.filter(is_completed=False).order_by("priority", "deadline")
 
     context = {
