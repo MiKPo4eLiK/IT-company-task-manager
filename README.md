@@ -43,6 +43,8 @@ LOGIN:
 
   -- To login, you can use the following test credentials:
 
-  Username: your_test_username
+  Username: Admin
 
-  Password: your_test_password
+  Password: AdminUser1234567890
+
+  Deployed project: https://dashboard.render.com/web/srv-d2i9lbn5r7bs73f9dg00/events
