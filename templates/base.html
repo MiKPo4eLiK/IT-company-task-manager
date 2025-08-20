@@ -15,7 +15,10 @@
     <div class="ms-auto">
       {% if user.is_authenticated %}
         <span class="navbar-text me-2">Welcome, {{ user.username }}!</span>
-        <a href="{% url 'company:logout' %}" class="btn btn-outline-light btn-sm">Log Out</a>
+        <form action="{% url 'company:logout' %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-light btn-sm">Log Out</button>
+        </form>
       {% else %}
         <a href="{% url 'company:login' %}" class="btn btn-outline-light btn-sm">Log In</a>
       {% endif %}
