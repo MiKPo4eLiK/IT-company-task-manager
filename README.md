@@ -47,4 +47,4 @@ LOGIN:
 
   Password: AdminUser1234567890
 
-  Deployed project: https://dashboard.render.com/web/srv-d2i9lbn5r7bs73f9dg00/events
+  Deployed project: https://it-company-task-manager-onro.onrender.com
