@@ -43,8 +43,8 @@ LOGIN:
 
   -- To login, you can use the following test credentials:
 
-  Username: Admin
+  Username: Admin999
 
-  Password: AdminUser1234567890
+  Password: AdminUser9991234567890
 
   Deployed project: https://it-company-task-manager-onro.onrender.com
